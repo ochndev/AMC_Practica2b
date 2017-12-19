@@ -87,7 +87,7 @@ public class ManejaFichero {
             BFR.newLine();
             BFR.write("TOUR_SECTION");
             for(int i = 0; i < solucion.size() ; i++){
-                BFR.write(solucion.get(i).);
+                BFR.write(solucion.get(i).MostrarArista());
                 BFR.newLine();
             }
             BFR.write("-1");

@@ -21,7 +21,7 @@ public class Algoritmos {
     ArrayList<Punto> puntos;
     
     
-    public ArrayList<Punto>  GenerarPuntosAleatorios(int talla){
+    public ArrayList<Punto>  GenerarVerticesAleatorios(int talla){
 
         Random rnd = new Random(System.currentTimeMillis());        
         ArrayList<Punto> ArrayDePuntos = new ArrayList();

@@ -13,18 +13,20 @@ import amc_practica2b.Punto;
  */
 public class Arista {
 
-    private Punto A;
-    private Punto B;
+    private Vertice A;
+    private Vertice B;
     private double distancia;
     
-    public Arista(Punto a, Punto b, double distancia){
+    public Arista(Vertice a, Vertice b, double distancia){
         this.A = a;
         this.B = b;
         this.distancia = distancia;
     }
     
     public String MostrarArista(){
-        String auxiliar = A.getNombre()+;
+        String auxiliar = "("+A.getNombre()+" - "+B.getNombre()+")";
+        
+        return auxiliar;
     }
     
     
