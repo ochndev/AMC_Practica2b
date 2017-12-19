@@ -5,20 +5,26 @@
  */
 package grafo;
 
+import amc_practica2b.Punto;
+
 /**
  *
  * @author oscar
  */
 public class Arista {
 
-    private Vertice A;
-    private Vertice B;
+    private Punto A;
+    private Punto B;
     private double distancia;
     
-    public Arista(Vertice a, Vertice b, double distancia){
+    public Arista(Punto a, Punto b, double distancia){
         this.A = a;
         this.B = b;
         this.distancia = distancia;
+    }
+    
+    public String MostrarArista(){
+        String auxiliar = A.getNombre()+;
     }
     
     

@@ -7,6 +7,7 @@ package amc_practica2b;
 
 import manejaFichero.ManejaFichero;
 import algoritmos.Algoritmos;
+import grafo.Grafo;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,6 +32,7 @@ public class AMC_Practica2b {
         Algoritmos Algo = new Algoritmos();
         ArrayList<Punto> ArrayDePuntos = new ArrayList<>();
         ManejaFichero MF;
+        int talla = 0;
         
         do{
             Scanner scn;
@@ -39,8 +41,8 @@ public class AMC_Practica2b {
             System.out.println("DISTANCIA 3 PUNTOS");
             System.out.println("1. Generar array aleatorio");
             System.out.println("2. Leer fichero");
-            System.out.println("3. Calcular 3 puntos por Exhaustivo");
-            System.out.println("4. Calcular 3 puntos por Algoritmo DyV");
+            System.out.println("3. Arbol de recubrimiento minimo Kruskal");
+            System.out.println("4. Arbol de recubrimiento minimo Prim");
             System.out.println("0. Salir");
             System.out.println("Introduzca una opcion: ");
             
@@ -48,7 +50,9 @@ public class AMC_Practica2b {
 
             switch(opcion){
                 case 1:
-                    ArrayDePuntos = Algo.GenerarPuntosAleatorios();
+                    System.out.println("Escriba la talla del problema: ");
+                    talla = scn.nextInt();
+                    ArrayDePuntos = Algo.GenerarPuntosAleatorios(talla);
                 break;
 
                 case 2:
@@ -66,41 +70,19 @@ public class AMC_Practica2b {
                 break;
 
                 case 3:
-                {    
-                    long tiempoini = 0, tiempofin = 0;
-                    double distanciaminima = 0;
-                    long tiempototal = 0;
-
-                    Algo.OrdenarArrayPunto(ArrayDePuntos);
+                {   
+                    Grafo graf = new Grafo(ArrayDePuntos);
                     
-                    for(int i = 0; i < REPETICIONES; i++){
-                     
-                        tiempoini = System.nanoTime();
-                        distanciaminima = Algo.DistanciaMinimaExhaustivo(ArrayDePuntos);
-                        tiempofin = System.nanoTime();
-                        tiempototal += tiempofin-tiempoini;
-                    }
-                    System.out.println("La distancia minima entre 3 puntos es:" + distanciaminima);
-                    System.out.println("El tiempo dedicado a la tarea es: "+(tiempototal/REPETICIONES)/1000 + " microsegundos");
+                    Algo.AlgoritmoDeKruskal(graf);
                 }    
                 break;
                 
                 case 4:
                 {
+                    Grafo graf = new Grafo(ArrayDePuntos);
                     
-                    long tiempoini = 0, tiempofin = 0, tiempototal = 0;
-                    double distanciaminima = 0;
-                    Algo.OrdenarArrayPunto(ArrayDePuntos);
-                    
-                    for (int i = 0 ; i < REPETICIONES ; i++) {
-                        tiempoini = System.nanoTime();
-                        distanciaminima = Algo.DistanciaMinimaDyV(ArrayDePuntos);
-                        tiempofin = System.nanoTime();
-                        tiempototal += tiempofin - tiempoini;
-                    }
-                    
-                    System.out.println("La distancia minima entre 3 puntos es:" + distanciaminima);
-                    System.out.println("El tiempo dedicado a la tarea es: "+(tiempototal/REPETICIONES)/1000 + " microsegundos");
+                    MF.Escribir(Algo.AlgoritmoDePrim(graf));
+
                 }
                 break;
             }

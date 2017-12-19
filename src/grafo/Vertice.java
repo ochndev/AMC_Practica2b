@@ -21,19 +21,19 @@ public class Vertice {
         this.nombre = nombre;
     }
 
-    public int getCoordX() {
+    public int getX() {
         return coordX;
     }
 
-    public void setCoordX(int coordX) {
+    public void setX(int coordX) {
         this.coordX = coordX;
     }
 
-    public int getCoordY() {
+    public int getY() {
         return coordY;
     }
 
-    public void setCoordY(int coordY) {
+    public void setY(int coordY) {
         this.coordY = coordY;
     }
 

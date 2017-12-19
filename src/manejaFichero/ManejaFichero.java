@@ -6,6 +6,7 @@
 package manejaFichero;
 
 import amc_practica2b.Punto;
+import grafo.Arista;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -70,7 +71,7 @@ public class ManejaFichero {
         return this.aux;        
     }
     
-    public void Escribir(ArrayList<Punto>  solucion) throws IOException{
+    public void Escribir(ArrayList<Arista>  solucion) throws IOException{
         
         outputFile = inputFile + ".opt.tour";
         
@@ -86,7 +87,7 @@ public class ManejaFichero {
             BFR.newLine();
             BFR.write("TOUR_SECTION");
             for(int i = 0; i < solucion.size() ; i++){
-                BFR.write(solucion.get(i).getX()+" "+solucion.get(i).getY());
+                BFR.write(solucion.get(i).);
                 BFR.newLine();
             }
             BFR.write("-1");

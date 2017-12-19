@@ -15,12 +15,12 @@ import algoritmos.Algoritmos;
  */
 public class Grafo {
    
-    private ArrayList<Vertice> vertices;
+    private ArrayList<Punto> vertices;
     private ArrayList<Arista> aristas;
     private int numelementos;
     private double [][] matriz_distancias;
 
-    public Grafo(ArrayList<Vertice> vertices, ArrayList<Arista> aristas, int numelementos) {
+    public Grafo(ArrayList<Punto> vertices, ArrayList<Arista> aristas, int numelementos) {
         this.vertices = vertices;
         this.aristas = aristas;
         this.numelementos = numelementos;
@@ -37,10 +37,9 @@ public class Grafo {
         for(int i= 0; i<numelementos; i++)
             for(int j = 0; j<numelementos; j++)
                 matriz_distancias[i][j] = CalcularDistancia2Puntos(puntos.get(i),puntos.get(j));
-        
     }
 
-    public ArrayList<Vertice> getVertices() {
+    public ArrayList<Puntos> getVertices() {
         return vertices;
     }
 
@@ -64,9 +63,13 @@ public class Grafo {
         this.numelementos = numelementos;
     }
     
-    public double CalcularDistancia2Puntos(Punto A, Punto B){
-        double distancia = Math.sqrt(Math.abs(A.getX()-B.getX())+Math.abs(A.getY()-B.getY()));
+    private double CalcularDistancia2Puntos(Punto A, Punto B){
+        double distancia = Math.sqrt(Math.pow(A.getX()-B.getX(),2)+Math.pow(A.getY()-B.getY(),2));
         return distancia;
+    }
+    
+    public double [][] getMatrizDistancias(){
+        return this.matriz_distancias;
     }
     
 }
