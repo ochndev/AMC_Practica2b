@@ -10,6 +10,7 @@ import grafo.Grafo;
 import amc_practica2b.Punto;
 import grafo.Vertice;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.Random;
 
 /**
@@ -45,20 +46,50 @@ public class Algoritmos {
     
     public ArrayList<Arista> AlgoritmoDeKruskal(Grafo g){
         ArrayList<Arista> ConjuntoSolucion;
+        PriorityQueue<Arista> QueueCandidatos;
+        QueueCandidatos = new PriorityQueue();
+
+        ArrayList<Arista> ConjuntoCandidatos;
         ConjuntoSolucion = new ArrayList<>();
-        return ConjuntoSolucion;
+        ConjuntoCandidatos = new ArrayList<>();
+
+        //Crear una Cola de prioridad con las aristas ordenadas
+        
+        for(int i = 0; i < ConjuntoCandidatos.size(); i++)
+            QueueCandidatos.add(g.getAristas().get(i));
+        
+        int n = QueueCandidatos.size();
+        
+        //Inicializar    
+        
+            //inicializamos n conjuntos por cada Vertice del Grafo.
+        
+        //Bucle voraz
+        
+        while(ConjuntoSolucion.size()!= n-1){
+            
+            //Extraemos la arista mas corta eliminandola de la cola.            
+            Arista aux = QueueCandidatos.poll();
+            
+            if(Conjunto U <> Conjunto V){
+                Fusionar(Vertices(),Vertices());
+                ConjuntoSolucion.add(aux);
+            }
+        }   
+            
+        return ConjuntoSolucion;        
     }
     
     public ArrayList<Arista> AlgoritmoDePrim(Grafo graf){
                 
         Arista auxar;
         
-        //elegir punto de partida
-        
+        //elegir punto de partida        
         Random rnd = new Random();
         int indicealeatorio = rnd.nextInt()/graf.getNumelementos();
         
         Vertice verticeaux = graf.getVertices().get(indicealeatorio);
+        //Añadimos el vertice en una cola de prioridad ordenada por distancia
         
         //desplegamos los adyacentes del vertice, añadimos al arbol la distancia minima
         //añadimos el vertice al arbol
@@ -78,6 +109,8 @@ public class Algoritmos {
             if(graf.getMatrizDistancias())
 
         }
+        
+        
         //si es solucion lo añado al conjunto solucion
         
         ConjuntoSolucion.add(auxar);
