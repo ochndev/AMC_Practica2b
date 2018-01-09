@@ -60,23 +60,25 @@ public class Algoritmos {
         
         int n = QueueCandidatos.size();
         
-        //Inicializar    
-        
-            //inicializamos n conjuntos por cada Vertice del Grafo.
-        
+        //Inicializar
+            
+            ArrayList<ArrayList<Vertice>> ConjuntoVertices;
+            
         //Bucle voraz
         
         while(ConjuntoSolucion.size()!= n-1){
             
             //Extraemos la arista mas corta eliminandola de la cola.            
             Arista aux = QueueCandidatos.poll();
+            ConjuntoU = ConjuntoVertices.contains(aux.getA());
+            ConjuntoV = BuscarEnConjunto(aux.getB());
             
-            if(Conjunto U <> Conjunto V){
-                Fusionar(Vertices(),Vertices());
+            if(ConjuntoU <> ConjuntoV){
+                Fusionar(ConjuntoU,ConjuntoV);
                 ConjuntoSolucion.add(aux);
             }
-        }   
-            
+        }
+        
         return ConjuntoSolucion;        
     }
     

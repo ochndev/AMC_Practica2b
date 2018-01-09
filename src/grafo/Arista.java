@@ -29,5 +29,13 @@ public class Arista {
         return auxiliar;
     }
     
+    public Vertice getA(){
+        return A;
+    }
+    
+    public Vertice getB(){
+        return B;
+    }
+    
     
 }
