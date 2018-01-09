@@ -62,7 +62,8 @@ public class Algoritmos {
         
         //Inicializar
             
-            ArrayList<ArrayList<Vertice>> ConjuntoVertices;
+            ArrayList <ArrayList<Vertice>> ConjuntoVertices;
+            ConjuntoVertices = new ArrayList<ArrayList<>>();
             
         //Bucle voraz
         
@@ -71,7 +72,7 @@ public class Algoritmos {
             //Extraemos la arista mas corta eliminandola de la cola.            
             Arista aux = QueueCandidatos.poll();
             ConjuntoU = ConjuntoVertices.contains(aux.getA());
-            ConjuntoV = BuscarEnConjunto(aux.getB());
+            ConjuntoV = ConjuntoVertices.contains(aux.getB());
             
             if(ConjuntoU <> ConjuntoV){
                 Fusionar(ConjuntoU,ConjuntoV);
