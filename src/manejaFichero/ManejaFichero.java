@@ -7,6 +7,7 @@ package manejaFichero;
 
 import amc_practica2b.Punto;
 import grafo.Arista;
+import grafo.Vertice;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +24,7 @@ public class ManejaFichero {
     
     String inputFile;
     String outputFile;
-    ArrayList<Punto> aux;
+    ArrayList<Vertice> aux;
     int dimmension;
     String nombreFichero;
     private int solution;
@@ -34,12 +35,12 @@ public class ManejaFichero {
         
     }
     
-    public ArrayList<Punto> Leer() throws FileNotFoundException, IOException{
+    public ArrayList<Vertice> Leer() throws FileNotFoundException, IOException{
         
         File F = new File(inputFile);
         
         Scanner scr = new Scanner(F);
-        Punto punt;
+        Vertice vert;
         String cadena = "";
         double coordX, coordY;
         
@@ -61,9 +62,9 @@ public class ManejaFichero {
             coordX = scr.nextFloat();
             coordY = scr.nextFloat();
             
-            punt = new Punto(coordX, coordY);
+            vert = new Vertice(coordX, coordY, i);
             
-            aux.add(punt);
+            aux.add(vert);
         }
         
         scr.close();

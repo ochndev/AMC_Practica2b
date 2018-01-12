@@ -11,17 +11,17 @@ package grafo;
  */
 public class Vertice {
     
-    private int coordX;
-    private int coordY;
+    private double coordX;
+    private double coordY;
     int nombre;
 
-    public Vertice(int coordX, int coordY, int nombre) {
+    public Vertice(double coordX, double coordY, int nombre) {
         this.coordX = coordX;
         this.coordY = coordY;
         this.nombre = nombre;
     }
 
-    public int getX() {
+    public double getX() {
         return coordX;
     }
 
@@ -29,7 +29,7 @@ public class Vertice {
         this.coordX = coordX;
     }
 
-    public int getY() {
+    public double getY() {
         return coordY;
     }
 

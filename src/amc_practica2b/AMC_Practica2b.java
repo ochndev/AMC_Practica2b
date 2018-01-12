@@ -8,6 +8,7 @@ package amc_practica2b;
 import manejaFichero.ManejaFichero;
 import algoritmos.Algoritmos;
 import grafo.Grafo;
+import grafo.Vertice;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -30,15 +31,15 @@ public class AMC_Practica2b {
         
         int opcion;
         Algoritmos Algo = new Algoritmos();
-        ArrayList<Punto> ArrayDePuntos = new ArrayList<>();
-        ManejaFichero MF;
+        ArrayList<Vertice> ArrayDeVertices = new ArrayList<>();
+        ManejaFichero MF = new ManejaFichero(nombreFichero);
         int talla = 0;
         
         do{
             Scanner scn;
             scn = new Scanner(System.in);
             
-            System.out.println("DISTANCIA 3 PUNTOS");
+            System.out.println("ARBOL RECUBRIDOR MINIMO (KRUSKAL Y PRIM)");
             System.out.println("1. Generar array aleatorio");
             System.out.println("2. Leer fichero");
             System.out.println("3. Arbol de recubrimiento minimo Kruskal");
@@ -52,7 +53,7 @@ public class AMC_Practica2b {
                 case 1:
                     System.out.println("Escriba la talla del problema: ");
                     talla = scn.nextInt();
-                    ArrayDePuntos = Algo.GenerarPuntosAleatorios(talla);
+                    ArrayDeVertices = Algo.GenerarVerticesAleatorios(talla);
                 break;
 
                 case 2:
@@ -62,7 +63,7 @@ public class AMC_Practica2b {
                     MF = new ManejaFichero(nombreFichero);
 
                     try {
-                        ArrayDePuntos = MF.Leer();
+                        ArrayDeVertices = MF.Leer();
                     } catch (IOException ex) {
                         Logger.getLogger(AMC_Practica2b.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -71,7 +72,7 @@ public class AMC_Practica2b {
 
                 case 3:
                 {   
-                    Grafo graf = new Grafo(ArrayDePuntos);
+                    Grafo graf = new Grafo(ArrayDeVertices);
                     
                     Algo.AlgoritmoDeKruskal(graf);
                 }    
@@ -79,9 +80,13 @@ public class AMC_Practica2b {
                 
                 case 4:
                 {
-                    Grafo graf = new Grafo(ArrayDePuntos);
+                    Grafo graf = new Grafo(ArrayDeVertices);
                     
+                try {
                     MF.Escribir(Algo.AlgoritmoDePrim(graf));
+                } catch (IOException ex) {
+                    Logger.getLogger(AMC_Practica2b.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
                 }
                 break;

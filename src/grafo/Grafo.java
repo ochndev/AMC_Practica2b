@@ -19,24 +19,21 @@ public class Grafo {
     private ArrayList<Arista> aristas;
     private int numelementos;
     private double [][] matriz_distancias;
-
-    public Grafo(ArrayList<Vertice> vertices, ArrayList<Arista> aristas, int numelementos) {
-        this.vertices = vertices;
-        this.aristas = aristas;
-        this.numelementos = numelementos;
-        this.matriz_distancias = new double [numelementos][numelementos];
-        
-    }
     
-    public Grafo(ArrayList<Punto> puntos){
+    public Grafo(ArrayList<Vertice> vertices){
         
-        numelementos = puntos.size();
-        
+        numelementos = vertices.size();
+        aristas = new ArrayList();
         matriz_distancias = new double [numelementos][numelementos];
         
-        for(int i= 0; i<numelementos; i++)
-            for(int j = 0; j<numelementos; j++)
-                matriz_distancias[i][j] = CalcularDistancia2Puntos(puntos.get(i),puntos.get(j));
+        //Generamos la matriz de distancias y creamos el conjunto de aristas
+        
+        for(int i= 0; i<numelementos; i++){
+            for(int j = 0; j<numelementos; j++){
+                matriz_distancias[i][j] = CalcularDistancia2Puntos(vertices.get(i),vertices.get(j));
+                aristas.add(new Arista(vertices.get(i),vertices.get(j),matriz_distancias[i][j]));
+            }
+        }
     }
 
     public ArrayList<Vertice> getVertices() {
@@ -63,7 +60,7 @@ public class Grafo {
         this.numelementos = numelementos;
     }
     
-    private double CalcularDistancia2Puntos(Punto A, Punto B){
+    private double CalcularDistancia2Puntos(Vertice A, Vertice B){
         double distancia = Math.sqrt(Math.pow(A.getX()-B.getX(),2)+Math.pow(A.getY()-B.getY(),2));
         return distancia;
     }

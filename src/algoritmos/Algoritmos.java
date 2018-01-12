@@ -22,11 +22,11 @@ public class Algoritmos {
     ArrayList<Punto> puntos;
     
     
-    public ArrayList<Punto>  GenerarVerticesAleatorios(int talla){
+    public ArrayList<Vertice>  GenerarVerticesAleatorios(int talla){
 
         Random rnd = new Random(System.currentTimeMillis());        
-        ArrayList<Punto> ArrayDePuntos = new ArrayList();
-        Punto puntoAux;
+        ArrayList<Vertice> ArrayDeVertices = new ArrayList();
+        Vertice puntoAux;
 
         System.out.println("Generando Puntos Aleatorios");
         
@@ -35,16 +35,18 @@ public class Algoritmos {
             int coordX = rnd.nextInt(10000);
             int coordY = rnd.nextInt(10000);
             
-            puntoAux = new Punto(coordX,coordY);
+            puntoAux = new Vertice(coordX,coordY,i);
             
-            ArrayDePuntos.add(puntoAux);            
+            ArrayDeVertices.add(puntoAux);            
         }
         
-        return ArrayDePuntos;
-        
+        return ArrayDeVertices;        
     }
     
+    /////////////// ALGORITMO DE KRUSKAL /////////////////////////////////////
+    
     public ArrayList<Arista> AlgoritmoDeKruskal(Grafo g){
+        
         ArrayList<Arista> ConjuntoSolucion;
         PriorityQueue<Arista> QueueCandidatos;
         QueueCandidatos = new PriorityQueue();
@@ -53,29 +55,42 @@ public class Algoritmos {
         ConjuntoSolucion = new ArrayList<>();
         ConjuntoCandidatos = new ArrayList<>();
 
-        //Crear una Cola de prioridad con las aristas ordenadas
+        //Crear una Cola de prioridad con las aristas ordenadas por distancia
         
         for(int i = 0; i < ConjuntoCandidatos.size(); i++)
             QueueCandidatos.add(g.getAristas().get(i));
         
         int n = QueueCandidatos.size();
         
-        //Inicializar
+        //Inicializar, creamos un conjunto de conjuntos disjuntos de vertices
             
-            ArrayList <ArrayList<Vertice>> ConjuntoVertices;
-            ConjuntoVertices = new ArrayList<ArrayList<>>();
+            ArrayList<ArrayList> ConjuntoConjuntoVertice = new ArrayList<>();
+            
+            for(int z = 0 ; z < g.getVertices().size() ; z++){
+                ArrayList<Vertice> ConjuntoVertices = new ArrayList<>();
+                ConjuntoVertices.add(g.getVertices().get(z));
+                ConjuntoConjuntoVertice.add(ConjuntoVertices);
+            }
             
         //Bucle voraz
         
         while(ConjuntoSolucion.size()!= n-1){
             
-            //Extraemos la arista mas corta eliminandola de la cola.            
+            //Extraemos la arista mas corta eliminandola de la cola.       
             Arista aux = QueueCandidatos.poll();
-            ConjuntoU = ConjuntoVertices.contains(aux.getA());
-            ConjuntoV = ConjuntoVertices.contains(aux.getB());
+
+            int i = 0 , j = 0;
             
-            if(ConjuntoU <> ConjuntoV){
-                Fusionar(ConjuntoU,ConjuntoV);
+            //Comprobamos que los vertices de la arista pertenecena distintos
+            //conjuntos disjuntos.
+            while(!ConjuntoConjuntoVertice.get(i).contains(aux.getA()))
+                i++;
+            
+            while(ConjuntoConjuntoVertice.get(j).contains(aux.getB()))
+                j++;
+            
+            if(i != j){
+                Fusionar(ConjuntoConjuntoVertice,i,j);
                 ConjuntoSolucion.add(aux);
             }
         }
@@ -83,13 +98,29 @@ public class Algoritmos {
         return ConjuntoSolucion;        
     }
     
+    public void Fusionar(ArrayList <ArrayList> CCV, int i, int j){
+        
+        int x = 0;
+        
+        for(x = 0; x < CCV.get(i).size(); x++)
+            CCV.get(j).add(CCV.get(i).get(x));
+        
+        CCV.get(i).remove(x);
+        
+    }
+    
+    
+    //////////////////////// ALGORITMO DE PRIM /////////////////////////////////
+    
+    
+    
     public ArrayList<Arista> AlgoritmoDePrim(Grafo graf){
                 
         Arista auxar;
         
         //elegir punto de partida        
         Random rnd = new Random();
-        int indicealeatorio = rnd.nextInt()/graf.getNumelementos();
+        int indicealeatorio = rnd.nextInt()%graf.getNumelementos();
         
         Vertice verticeaux = graf.getVertices().get(indicealeatorio);
         //Añadimos el vertice en una cola de prioridad ordenada por distancia
