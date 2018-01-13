@@ -25,7 +25,7 @@ public class Algoritmos {
     public ArrayList<Vertice>  GenerarVerticesAleatorios(int talla){
 
         Random rnd = new Random(System.currentTimeMillis());        
-        ArrayList<Vertice> ArrayDeVertices = new ArrayList();
+        ArrayList<Vertice> ArrayDeVertices = new ArrayList<>();
         Vertice puntoAux;
 
         System.out.println("Generando Puntos Aleatorios");
@@ -40,10 +40,12 @@ public class Algoritmos {
             ArrayDeVertices.add(puntoAux);            
         }
         
-        return ArrayDeVertices;        
+        return ArrayDeVertices;
     }
     
+    
     /////////////// ALGORITMO DE KRUSKAL /////////////////////////////////////
+    
     
     public ArrayList<Arista> AlgoritmoDeKruskal(Grafo g){
         
@@ -53,28 +55,30 @@ public class Algoritmos {
 
         ArrayList<Arista> ConjuntoCandidatos;
         ConjuntoSolucion = new ArrayList<>();
-        ConjuntoCandidatos = new ArrayList<>();
+        ConjuntoCandidatos = g.getAristas();
 
         //Crear una Cola de prioridad con las aristas ordenadas por distancia
         
-        for(int i = 0; i < ConjuntoCandidatos.size(); i++)
-            QueueCandidatos.add(g.getAristas().get(i));
+        for(int i = 0; i < ConjuntoCandidatos.size(); i++){
+            QueueCandidatos.add(ConjuntoCandidatos.get(i));
+        }
         
-        int n = QueueCandidatos.size();
+        int n = g.getNumelementos();
         
         //Inicializar, creamos un conjunto de conjuntos disjuntos de vertices
             
-            ArrayList<ArrayList> ConjuntoConjuntoVertice = new ArrayList<>();
+        ArrayList<ArrayList> ConjuntoConjuntoVertice = new ArrayList<>();
             
-            for(int z = 0 ; z < g.getVertices().size() ; z++){
-                ArrayList<Vertice> ConjuntoVertices = new ArrayList<>();
-                ConjuntoVertices.add(g.getVertices().get(z));
-                ConjuntoConjuntoVertice.add(ConjuntoVertices);
-            }
+        for(int z = 0 ; z < g.getVertices().size() ; z++){
+            ArrayList<Vertice> ConjuntoVertices = new ArrayList<>();
+            ConjuntoVertices.add(g.getVertices().get(z));
+            ConjuntoConjuntoVertice.add(ConjuntoVertices);
+        }
+         
             
         //Bucle voraz
         
-        while(ConjuntoSolucion.size()!= n-1){
+        while(ConjuntoSolucion.size() < n-1){
             
             //Extraemos la arista mas corta eliminandola de la cola.       
             Arista aux = QueueCandidatos.poll();
@@ -83,10 +87,11 @@ public class Algoritmos {
             
             //Comprobamos que los vertices de la arista pertenecena distintos
             //conjuntos disjuntos.
+            
             while(!ConjuntoConjuntoVertice.get(i).contains(aux.getA()))
                 i++;
             
-            while(ConjuntoConjuntoVertice.get(j).contains(aux.getB()))
+            while(!ConjuntoConjuntoVertice.get(j).contains(aux.getB()))
                 j++;
             
             if(i != j){
@@ -104,17 +109,19 @@ public class Algoritmos {
         
         for(x = 0; x < CCV.get(i).size(); x++)
             CCV.get(j).add(CCV.get(i).get(x));
-        
-        CCV.get(i).remove(x);
-        
+                
+        CCV.remove(i);
     }
     
+    public void mostrarAristas(ArrayList<Arista> solucion){
+        for(int i = 0 ; i < solucion.size(); i++)
+            System.out.println(solucion.get(i).MostrarArista());
+    }
     
     //////////////////////// ALGORITMO DE PRIM /////////////////////////////////
     
     
-    
-    public ArrayList<Arista> AlgoritmoDePrim(Grafo graf){
+    /*public ArrayList<Arista> AlgoritmoDePrim(Grafo graf){
                 
         Arista auxar;
         
@@ -150,6 +157,6 @@ public class Algoritmos {
         ConjuntoSolucion.add(auxar);
         
         return ConjuntoSolucion;
-    }
+    }*/
     
 }

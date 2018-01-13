@@ -11,7 +11,7 @@ import amc_practica2b.Punto;
  *
  * @author oscar
  */
-public class Arista {
+public class Arista implements Comparable<Arista>{
 
     private Vertice A;
     private Vertice B;
@@ -35,6 +35,15 @@ public class Arista {
     
     public Vertice getB(){
         return B;
+    }
+
+    @Override
+    public int compareTo(Arista otra) {
+        
+        if(this.distancia > otra.distancia)
+            return 1;
+        else
+            return -1;
     }
     
     

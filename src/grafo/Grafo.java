@@ -22,16 +22,18 @@ public class Grafo {
     
     public Grafo(ArrayList<Vertice> vertices){
         
-        numelementos = vertices.size();
-        aristas = new ArrayList();
-        matriz_distancias = new double [numelementos][numelementos];
+        this.vertices = vertices;
+        this.numelementos = vertices.size();
+        this.aristas = new ArrayList();
+        this.matriz_distancias = new double [numelementos][numelementos];
         
         //Generamos la matriz de distancias y creamos el conjunto de aristas
         
         for(int i= 0; i<numelementos; i++){
             for(int j = 0; j<numelementos; j++){
-                matriz_distancias[i][j] = CalcularDistancia2Puntos(vertices.get(i),vertices.get(j));
-                aristas.add(new Arista(vertices.get(i),vertices.get(j),matriz_distancias[i][j]));
+                this.matriz_distancias[i][j] = CalcularDistancia2Puntos(vertices.get(i),vertices.get(j));
+                if(j != i && matriz_distancias[i][j] != 0)
+                    this.aristas.add(new Arista(vertices.get(i),vertices.get(j),matriz_distancias[i][j]));
             }
         }
     }
