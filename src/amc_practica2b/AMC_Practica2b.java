@@ -35,6 +35,7 @@ public class AMC_Practica2b {
         ArrayList<Vertice> ArrayDeVertices = new ArrayList<>();
         ManejaFichero MF = new ManejaFichero(nombreFichero);
         int talla = 0;
+        ArrayList<Arista> Resultado = new ArrayList<>();
         
         do{
             Scanner scn;
@@ -73,9 +74,24 @@ public class AMC_Practica2b {
 
                 case 3:
                 {   
-                    Grafo graf = new Grafo(ArrayDeVertices);
+                    
+                    long tiempoini = 0, tiempofin = 0, tiempototal = 0;
+                    
+                    for(int i = 0; i< 10; i++){                    
+                        Grafo graf = new Grafo(ArrayDeVertices);
+                        tiempoini = System.nanoTime();
+                        Resultado = Algo.AlgoritmoDeKruskal(graf);
+                        tiempofin = System.nanoTime();
+                        tiempototal += tiempofin - tiempoini;
+                    }
+                    
+                    Algo.mostrarAristas(Resultado);
+                    System.out.println("Solucion: "+Algo.CalcularSolucion(Resultado));
+                    
+                    System.out.println("El tiempo es: "+tiempototal/10/1000+" us");
+                    
                     try {
-                        MF.Escribir(Algo.AlgoritmoDeKruskal(graf));
+                        MF.Escribir(Resultado);
                     } catch (IOException ex) {
                         Logger.getLogger(AMC_Practica2b.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -83,10 +99,26 @@ public class AMC_Practica2b {
                 break;
                 
                 case 4:
-                {
-                    Grafo graf = new Grafo(ArrayDeVertices);
+                {   
+                    
+                    long tiempoini = 0, tiempofin = 0, tiempototal = 0;
+
+                    
+                    for(int i = 0 ; i < 10; i++){
+                        Grafo graf = new Grafo(ArrayDeVertices);
+                        tiempoini = System.nanoTime();
+                        Resultado = Algo.AlgoritmoDePrim(graf);
+                        tiempofin = System.nanoTime();
+                        tiempototal += tiempofin - tiempoini;
+                    }
+
+                    Algo.mostrarAristas(Resultado);
+                    System.out.println("Solucion: "+Algo.CalcularSolucion(Resultado));
+                    
+                    System.out.println("El tiempo es: "+tiempototal/10/1000+" us");
+                    
                     try {
-                        MF.Escribir(Algo.AlgoritmoDePrim(graf));
+                        MF.Escribir(Resultado);
                     } catch (IOException ex) {
                         Logger.getLogger(AMC_Practica2b.class.getName()).log(Level.SEVERE, null, ex);
                     }

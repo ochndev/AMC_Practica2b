@@ -96,9 +96,6 @@ public class Algoritmos {
             }
         }
         
-        mostrarAristas(ConjuntoSolucion);
-        System.out.println("Solucion: "+CalcularSolucion(ConjuntoSolucion));
-        
         return ConjuntoSolucion;
     }
     
@@ -155,9 +152,6 @@ public class Algoritmos {
             verticeaux = AristaAux.getB();
             
         }
-        
-        mostrarAristas(ConjuntoSolucion);
-        System.out.println("Solucion: "+CalcularSolucion(ConjuntoSolucion));
         
         return ConjuntoSolucion;
     }
