@@ -5,7 +5,6 @@
  */
 package grafo;
 
-import amc_practica2b.Punto;
 import java.util.ArrayList;
 import algoritmos.Algoritmos;
 

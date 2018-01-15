@@ -5,7 +5,7 @@
  */
 package manejaFichero;
 
-import amc_practica2b.Punto;
+import algoritmos.Algoritmos;
 import grafo.Arista;
 import grafo.Vertice;
 import java.io.BufferedWriter;
@@ -27,7 +27,7 @@ public class ManejaFichero {
     ArrayList<Vertice> aux;
     int dimmension;
     String nombreFichero;
-    private int solution;
+    private double solution;
     
     public ManejaFichero(String Fichero){       
 
@@ -74,6 +74,8 @@ public class ManejaFichero {
     
     public void Escribir(ArrayList<Arista>  solucion) throws IOException{
         
+        Algoritmos algo = new Algoritmos();
+        solution = algo.CalcularSolucion(solucion);
         outputFile = inputFile + ".opt.tour";
         
         FileWriter f = new FileWriter(outputFile);

@@ -5,7 +5,6 @@
  */
 package grafo;
 
-import amc_practica2b.Punto;
 
 /**
  *
@@ -35,6 +34,10 @@ public class Arista implements Comparable<Arista>{
     
     public Vertice getB(){
         return B;
+    }
+    
+    public double getDistancia(){
+        return this.distancia;
     }
 
     @Override

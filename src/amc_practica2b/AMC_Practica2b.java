@@ -74,22 +74,22 @@ public class AMC_Practica2b {
                 case 3:
                 {   
                     Grafo graf = new Grafo(ArrayDeVertices);
-                    Algo.mostrarAristas(Algo.AlgoritmoDeKruskal(graf));
-                }    
+                    try {
+                        MF.Escribir(Algo.AlgoritmoDeKruskal(graf));
+                    } catch (IOException ex) {
+                        Logger.getLogger(AMC_Practica2b.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 break;
                 
                 case 4:
                 {
-                    /*
                     Grafo graf = new Grafo(ArrayDeVertices);
-                    
                     try {
                         MF.Escribir(Algo.AlgoritmoDePrim(graf));
                     } catch (IOException ex) {
                         Logger.getLogger(AMC_Practica2b.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    */
-
                 }
                 break;
             }
