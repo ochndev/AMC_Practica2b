@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
+import java.util.Locale;
 
 /**
  *
@@ -38,8 +39,9 @@ public class ManejaFichero {
     public ArrayList<Vertice> Leer() throws FileNotFoundException, IOException{
         
         File F = new File(inputFile);
-        
         Scanner scr = new Scanner(F);
+        scr.useLocale(Locale.ENGLISH);
+
         Vertice vert;
         String cadena = "";
         double coordX, coordY;
