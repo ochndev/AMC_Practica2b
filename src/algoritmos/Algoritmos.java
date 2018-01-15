@@ -7,7 +7,6 @@ package algoritmos;
 
 import grafo.Arista;
 import grafo.Grafo;
-import amc_practica2b.Punto;
 import grafo.Vertice;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -18,9 +17,6 @@ import java.util.Random;
  * @author usuario
  */
 public class Algoritmos {
-
-    ArrayList<Punto> puntos;
-    
     
     public ArrayList<Vertice>  GenerarVerticesAleatorios(int talla){
 
@@ -100,7 +96,10 @@ public class Algoritmos {
             }
         }
         
-        return ConjuntoSolucion;        
+        mostrarAristas(ConjuntoSolucion);
+        System.out.println("Solucion: "+CalcularSolucion(ConjuntoSolucion));
+        
+        return ConjuntoSolucion;
     }
     
     public void Fusionar(ArrayList <ArrayList> CCV, int i, int j){
@@ -120,43 +119,74 @@ public class Algoritmos {
     
     //////////////////////// ALGORITMO DE PRIM /////////////////////////////////
     
-    
-    /*public ArrayList<Arista> AlgoritmoDePrim(Grafo graf){
+    //Como todos los puntos en el grafo estan conectados con todos, contruiremos
+    //el algoritmo de un modo diferente (Sin matriz de adyacencia)
+    public ArrayList<Arista> AlgoritmoDePrim(Grafo graf){
                 
-        Arista auxar;
+        ArrayList<Arista> ConjuntoSolucion;
+        Arista AristaAux;
+        
+        int n = graf.getNumelementos();
         
         //elegir punto de partida        
         Random rnd = new Random();
-        int indicealeatorio = rnd.nextInt()%graf.getNumelementos();
+        rnd.setSeed(System.currentTimeMillis());
+        int indicealeatorio = Math.abs(rnd.nextInt()%graf.getNumelementos());
         
         Vertice verticeaux = graf.getVertices().get(indicealeatorio);
         //Añadimos el vertice en una cola de prioridad ordenada por distancia
         
+        ArrayList<Vertice> VerticesVisitados = new ArrayList<>();
+        
         //desplegamos los adyacentes del vertice, añadimos al arbol la distancia minima
         //añadimos el vertice al arbol
         //movemos el puntero al vertice apuntado por la arista con distancia minima
-               
-        ArrayList<Arista> ConjuntoSolucion;
-        ConjuntoSolucion = new ArrayList<>();
         
-        double distanciaminima = 1000000;
-        
-        for(int j = 0; j< graf.getNumelementos(); j++){
-            
-            distanciaAux = Distancia2Vertices();
-            
-            
-                        verticeaux = graf.getVertices().get(j);
-            if(graf.getMatrizDistancias())
-
-        }
-        
+        ConjuntoSolucion = new ArrayList<>();        
         
         //si es solucion lo añado al conjunto solucion
         
-        ConjuntoSolucion.add(auxar);
+        while(ConjuntoSolucion.size() < n-1){
+            
+            AristaAux = MasProximo(graf,verticeaux,VerticesVisitados);
+            
+            ConjuntoSolucion.add(AristaAux);
+            VerticesVisitados.add(AristaAux.getB());
+            verticeaux = AristaAux.getB();
+            
+        }
+        
+        System.out.println("Solucion: "+CalcularSolucion(ConjuntoSolucion));
         
         return ConjuntoSolucion;
-    }*/
+    }
+    
+    public Arista MasProximo(Grafo graf, Vertice verticeaux, ArrayList<Vertice> VerticesVisitados){
+        
+        int indice = graf.getVertices().indexOf(verticeaux);
+        double distancia_minima = 1000000;
+        int indice_final = 0;
+        for(int j = 0 ; j < graf.getVertices().size() ; j++){
+            if((graf.getMatrizDistancias()[indice][j] < distancia_minima) && 
+               (!VerticesVisitados.contains(graf.getVertices().get(j))) && 
+               ( j != indice )){
+                
+                indice_final = j;
+                distancia_minima = graf.getMatrizDistancias()[indice][j];
+            
+            }            
+        }
+            
+        return (new Arista(verticeaux,graf.getVertices().get(indice_final),graf.getMatrizDistancias()[indice][indice_final]));
+            
+    }
+    
+    public double CalcularSolucion(ArrayList<Arista> solucion){
+        double suma_solucion = 0;
+        for(int i = 0 ; i < solucion.size() ; i++){
+            suma_solucion += solucion.get(i).getDistancia();
+        }
+        return suma_solucion;
+    }
     
 }
