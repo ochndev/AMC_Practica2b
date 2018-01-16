@@ -177,11 +177,37 @@ public class Algoritmos {
     }
     
     public double CalcularSolucion(ArrayList<Arista> solucion){
+                
         double suma_solucion = 0;
         for(int i = 0 ; i < solucion.size() ; i++){
             suma_solucion += solucion.get(i).getDistancia();
         }
         return suma_solucion;
+    }
+    
+    
+    //EJERCICIO DE MODIFICACION DE PRACTICAS
+    
+    public double CalcularSolucionModificado(ArrayList<Arista> solucion, Grafo graf){
+        
+        double distanciaultimo = 0;
+        int primervertice = 0, ultimovertice = 0;
+        
+        double suma_solucion = 0;
+        for(int i = 0 ; i < solucion.size() ; i++){
+            suma_solucion += solucion.get(i).getDistancia();
+        }
+        
+        primervertice = solucion.get(0).getA().getNombre();
+        ultimovertice = solucion.get(solucion.size()-1).getB().getNombre();
+        distanciaultimo = graf.getMatrizDistancias()[primervertice][ultimovertice];
+        
+        System.out.println("primer vertice: "+primervertice);
+        System.out.println("ultimo vertice: "+ultimovertice);
+        System.out.println("distancia ultimo a primero: "+distanciaultimo);
+        
+        return suma_solucion + distanciaultimo;
+        
     }
     
 }

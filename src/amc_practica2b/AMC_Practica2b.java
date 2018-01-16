@@ -41,6 +41,7 @@ public class AMC_Practica2b {
             Scanner scn;
             scn = new Scanner(System.in);
             
+            System.out.println("----------------------------------------");
             System.out.println("ARBOL RECUBRIDOR MINIMO (KRUSKAL Y PRIM)");
             System.out.println("1. Generar array aleatorio");
             System.out.println("2. Leer fichero");
@@ -76,9 +77,10 @@ public class AMC_Practica2b {
                 {   
                     
                     long tiempoini = 0, tiempofin = 0, tiempototal = 0;
+                    Grafo graf = new Grafo(ArrayDeVertices);
                     
                     for(int i = 0; i< 10; i++){                    
-                        Grafo graf = new Grafo(ArrayDeVertices);
+
                         tiempoini = System.nanoTime();
                         Resultado = Algo.AlgoritmoDeKruskal(graf);
                         tiempofin = System.nanoTime();
@@ -87,7 +89,7 @@ public class AMC_Practica2b {
                     
                     Algo.mostrarAristas(Resultado);
                     System.out.println("Solucion: "+Algo.CalcularSolucion(Resultado));
-                    
+                    System.out.println("Solucion con ultimo vertice: "+Algo.CalcularSolucionModificado(Resultado, graf));                    
                     System.out.println("El tiempo es: "+tiempototal/10/1000+" us");
                     
                     try {
@@ -103,9 +105,10 @@ public class AMC_Practica2b {
                     
                     long tiempoini = 0, tiempofin = 0, tiempototal = 0;
 
+                    Grafo graf = new Grafo(ArrayDeVertices);
                     
                     for(int i = 0 ; i < 10; i++){
-                        Grafo graf = new Grafo(ArrayDeVertices);
+
                         tiempoini = System.nanoTime();
                         Resultado = Algo.AlgoritmoDePrim(graf);
                         tiempofin = System.nanoTime();
@@ -114,7 +117,7 @@ public class AMC_Practica2b {
 
                     Algo.mostrarAristas(Resultado);
                     System.out.println("Solucion: "+Algo.CalcularSolucion(Resultado));
-                    
+                    System.out.println("Solucion con ultimo vertice: "+Algo.CalcularSolucionModificado(Resultado, graf));
                     System.out.println("El tiempo es: "+tiempototal/10/1000+" us");
                     
                     try {
